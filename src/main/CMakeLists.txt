@@ -1,4 +1,5 @@
 add_subdirectory(relation)
+include_directories(${CMAKE_SOURCE_DIR}/extension/parquet/include)
 add_library_unity(duckdb_main
                   OBJECT
                   appender.cpp

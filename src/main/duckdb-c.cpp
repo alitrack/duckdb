@@ -4,7 +4,7 @@
 #include "duckdb/common/vector_operations/vector_operations.hpp"
 #include "duckdb.h"
 #include "duckdb.hpp"
-
+#include "parquet-extension.hpp"
 #include <cstring>
 
 #ifdef _WIN32
@@ -56,6 +56,8 @@ duckdb_state duckdb_connect(duckdb_database database, duckdb_connection *out) {
 	} catch (...) {
 		return DuckDBError;
 	}
+	ParquetExtension * ext = new ParquetExtension();
+	ext->Load(*wrapper->database);
 	*out = (duckdb_connection)connection;
 	return DuckDBSuccess;
 }

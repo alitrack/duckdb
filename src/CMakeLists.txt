@@ -61,10 +61,10 @@ else()
       Threads::Threads)
 
   add_library(duckdb SHARED ${ALL_OBJECT_FILES})
-  target_link_libraries(duckdb ${DUCKDB_LINK_LIBS})
+  target_link_libraries(duckdb ${DUCKDB_LINK_LIBS} parquet_extension)
 
   add_library(duckdb_static STATIC ${ALL_OBJECT_FILES})
-  target_link_libraries(duckdb_static ${DUCKDB_LINK_LIBS})
+  target_link_libraries(duckdb_static ${DUCKDB_LINK_LIBS} parquet_extension)
 
   target_include_directories(
     duckdb
@@ -116,7 +116,7 @@ if(BUILD_PYTHON OR BUILD_R)
   endif()
 endif()
 
-install(TARGETS duckdb duckdb_static
+install(TARGETS duckdb duckdb_static parquet_extension
         EXPORT "${DUCKDB_EXPORT_SET}"
         LIBRARY DESTINATION "${INSTALL_LIB_DIR}"
         ARCHIVE DESTINATION "${INSTALL_LIB_DIR}")
